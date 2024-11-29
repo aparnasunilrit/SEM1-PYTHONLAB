@@ -1,4 +1,4 @@
-//aim Write a Python program to perform arithmetic operations on two integer numbers.
+#aim Write a Python program to perform arithmetic operations on two integer numbers.
 
 num1=int(input("enter first number:"))
 num2=int(input("enter second number:"))
