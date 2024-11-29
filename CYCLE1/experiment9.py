@@ -1,4 +1,4 @@
-//AIM Program to determine whether a year is a leap year or not
+#AIM Program to determine whether a year is a leap year or not
 
 year=int(input("enter a year:"))
 if year%4!=0:
