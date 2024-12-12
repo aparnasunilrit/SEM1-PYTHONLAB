@@ -1,0 +1,269 @@
+class BankAccount:
+    def __init__(self, name, account_number, account_type, balance=0):
+        """
+        Initializes a new BankAccount object with details.
+        """
+        self.name = name
+        self.account_number = account_number
+        self.account_type = account_type
+        self.balance = balance
+
+    def deposit(self, amount):
+        """
+        Deposits an amount into the account.
+        """
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited {amount}. New balance: {self.balance}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        """
+        Withdraws an amount from the account if sufficient balance is available.
+        """
+        if amount > 0:
+            if amount <= self.balance:
+                self.balance -= amount
+                print(f"Withdrew {amount}. Remaining balance: {self.balance}")
+            else:
+                print("Insufficient balance!")
+        else:
+            print("Withdrawal amount must be positive.")
+
+    def display_details(self):
+        """
+        Displays the account details.
+        """
+        print("\nAccount Details:")
+        print(f"Name: {self.name}")
+        print(f"Account Number: {self.account_number}")
+        print(f"Account Type: {self.account_type}")
+        print(f"Balance: {self.balance}")
+
+
+# Main function to interact with the user
+def main():
+    print("Create a new bank account")
+    name = input("Enter your name: ")
+    account_number = input("Enter your account number: ")
+    account_type = input("Enter the type of account (e.g., Savings, Current): ")
+    balance = float(input("Enter the initial balance: "))
+
+    account = BankAccount(name, account_number, account_type, balance)
+
+    while True:
+        print("\nChoose an option:")
+        print("1. Deposit")
+        print("2. Withdraw")
+        print("3. Display Account Details")
+        print("4. Exit")
+        
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            amount = float(input("Enter amount to deposit: "))
+            account.deposit(amount)
+        elif choice == "2":
+            amount = float(input("Enter amount to withdraw: "))
+            account.withdraw(amount)
+        elif choice == "3":
+            account.display_details()
+        elif choice == "4":
+            print("Exiting the program. Thank you!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+# Run the program
+if __name__ == "__main__":
+    main()
+
+
+
+2.
+class Publisher:
+    def __init__(self, publisher_id, publisher_name):
+        """
+        Initializes a Publisher object with publisher id and name.
+        """
+        self.publisher_id = publisher_id
+        self.publisher_name = publisher_name
+
+    def display_details(self):
+        """
+        Displays publisher details. This method can be overridden by derived classes.
+        """
+        print("\nPublisher Details:")
+        print(f"Publisher ID: {self.publisher_id}")
+        print(f"Publisher Name: {self.publisher_name}")
+
+
+class Book(Publisher):
+    def __init__(self, publisher_id, publisher_name, title, author):
+        """
+        Initializes a Book object with title and author, using the Publisher's constructor.
+        """
+        super().__init__(publisher_id, publisher_name)
+        self.title = title
+        self.author = author
+
+    def display_details(self):
+        """
+        Displays book details along with publisher details. Overrides the base class method.
+        """
+        super().display_details()
+        print("Book Details:")
+        print(f"Title: {self.title}")
+        print(f"Author: {self.author}")
+
+
+class Python(Book):
+    def __init__(self, publisher_id, publisher_name, title, author, price, no_of_pages):
+        """
+        Initializes a Python book object with price and number of pages, 
+        using the Book's constructor.
+        """
+        super().__init__(publisher_id, publisher_name, title, author)
+        self.price = price
+        self.no_of_pages = no_of_pages
+
+    def display_details(self):
+        """
+        Displays details of the Python book, overriding the method in the Book class.
+        """
+        super().display_details()
+        print("Python Book Details:")
+        print(f"Price: {self.price}")
+        print(f"Number of Pages: {self.no_of_pages}")
+
+
+# Example Usage
+def main():
+    print("Enter Publisher Details:")
+    publisher_id = input("Enter Publisher ID: ")
+    publisher_name = input("Enter Publisher Name: ")
+
+    print("\nEnter Book Details:")
+    title = input("Enter Book Title: ")
+    author = input("Enter Author Name: ")
+
+    print("\nEnter Python Book Details:")
+    price = float(input("Enter Book Price: "))
+    no_of_pages = int(input("Enter Number of Pages: "))
+
+    # Create a Python book object
+    python_book = Python(publisher_id, publisher_name, title, author, price, no_of_pages)
+
+    # Display details of the Python book
+    print("\nDisplaying Python Book Details:")
+    python_book.display_details()
+
+
+# Run the program
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+from abc import ABC, abstractmethod
+
+
+class Polygon(ABC):
+    """
+    Abstract base class representing a generic polygon.
+    """
+
+    @abstractmethod
+    def get_dimensions(self):
+        """
+        Abstract method to get the dimensions of the polygon.
+        """
+        pass
+
+    @abstractmethod
+    def calculate_area(self):
+        """
+        Abstract method to calculate the area of the polygon.
+        """
+        pass
+
+
+class Rectangle(Polygon):
+    def __init__(self):
+        """
+        Initializes a Rectangle object.
+        """
+        self.length = 0
+        self.breadth = 0
+
+    def get_dimensions(self):
+        """
+        Gets the dimensions of the rectangle from the user.
+        """
+        self.length = float(input("Enter the length of the rectangle: "))
+        self.breadth = float(input("Enter the breadth of the rectangle: "))
+
+    def calculate_area(self):
+        """
+        Calculates and returns the area of the rectangle.
+        """
+        area = self.length * self.breadth
+        print(f"Area of the Rectangle: {area}")
+
+
+class Triangle(Polygon):
+    def __init__(self):
+        """
+        Initializes a Triangle object.
+        """
+        self.base = 0
+        self.height = 0
+
+    def get_dimensions(self):
+        """
+        Gets the dimensions of the triangle from the user.
+        """
+        self.base = float(input("Enter the base of the triangle: "))
+        self.height = float(input("Enter the height of the triangle: "))
+
+    def calculate_area(self):
+        """
+        Calculates and returns the area of the triangle.
+        """
+        area = 0.5 * self.base * self.height
+        print(f"Area of the Triangle: {area}")
+
+
+# Main program
+def main():
+    print("Choose a polygon:")
+    print("1. Rectangle")
+    print("2. Triangle")
+
+    choice = input("Enter your choice (1/2): ")
+
+    if choice == "1":
+        rectangle = Rectangle()
+        rectangle.get_dimensions()
+        rectangle.calculate_area()
+    elif choice == "2":
+        triangle = Triangle()
+        triangle.get_dimensions()
+        triangle.calculate_area()
+    else:
+        print("Invalid choice. Please select 1 or 2.")
+
+
+# Run the program
+if __name__ == "__main__":
+    main()
+
+
+          
+
+
+          
+              
